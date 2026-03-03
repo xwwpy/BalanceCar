@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Start;.\User;.\Libraries;.\System;.\oled;.\math;.\stm32f103_m_Exit;.\stm32f103_m_IIC;.\stm32f103_m_spi;.\w25q64;.\stmf103_m_timer;.\test</IncludePath>
+              <IncludePath>.\Start;.\User;.\Libraries;.\System;.\oled;.\math;.\stm32f103_m_Exit;.\stm32f103_m_IIC;.\stm32f103_m_spi;.\w25q64;.\stmf103_m_timer;.\test;.\Button</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -828,6 +828,21 @@
               <FileName>car_bat_test.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\test\car_bat_test.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>button</GroupName>
+          <Files>
+            <File>
+              <FileName>button_utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Button\button_utils.c</FilePath>
+            </File>
+            <File>
+              <FileName>button_utils.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Button\button_utils.h</FilePath>
             </File>
           </Files>
         </Group>
