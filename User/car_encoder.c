@@ -68,14 +68,14 @@ int64_t car_encoder_get_R(void) {
 void Motor_L_callback(void) { 
     uint8_t gpiob_pin_14_state = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_14);
     uint8_t gpiob_pin_15_state = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_15);
-    if (gpiob_pin_14_state == Bit_SET && gpiob_pin_15_state == Bit_RESET) {
-        encoder_L_count++;
+    if (gpiob_pin_14_state == Bit_SET && gpiob_pin_15_state == Bit_RESET) { // 对称的电机所以相反的状态对应相同的转动方向
+        encoder_L_count--;
     } else if (gpiob_pin_14_state == Bit_RESET && gpiob_pin_15_state == Bit_SET) {
-        encoder_L_count++;
+        encoder_L_count--;
     } else if (gpiob_pin_14_state == Bit_RESET && gpiob_pin_15_state == Bit_RESET) {
-        encoder_L_count--;
+        encoder_L_count++;
     } else if (gpiob_pin_14_state == Bit_SET && gpiob_pin_15_state == Bit_SET) {
-        encoder_L_count--;
+        encoder_L_count++;
     }
 }
 
