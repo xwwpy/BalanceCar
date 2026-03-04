@@ -1,9 +1,9 @@
 #include "car_usart2.h"
 
-u8 send_buff[100] = {0};
-u8 receive_buff[100] = {0};
-u8 receive_idx = 0;
-u8 end_idx = 0;
+volatile u8 send_buff[500] = {0};
+volatile u8 receive_buff[200] = {0};
+volatile u8 receive_idx = 0;
+volatile u8 end_idx = 0;
 void send_string(char* str, u8 len) {
 	while (len--) {
 		send_buff[end_idx] = *str;
