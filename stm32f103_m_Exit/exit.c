@@ -18,7 +18,6 @@ EXTI_Callback exti14_callback = 0;
 EXTI_Callback exti15_callback = 0;
 
 void Xww_Exit_Init(ExitFullInitTypedef* init_structure) {
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); // 配置nvic中断优先级分组
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE); //  开启AFIO时钟
     GPIO_InitTypeDef gpio_inin_structure; // 初始化对应的gpio时钟
     gpio_inin_structure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -82,7 +81,7 @@ void Xww_Exit_Init(ExitFullInitTypedef* init_structure) {
             gpio_inin_structure.GPIO_Mode = GPIO_Mode_IPU; // 配置为上拉输入
             break;
         case EXTI_Trigger_Rising_Falling:
-            gpio_inin_structure.GPIO_Mode = GPIO_Mode_IPD; // 配置为下拉输入
+            gpio_inin_structure.GPIO_Mode = GPIO_Mode_IPU; // 配置为上拉输入
             break;
         default:
             break;
@@ -205,102 +204,102 @@ void Xww_Exit_Init(ExitFullInitTypedef* init_structure) {
 
 
 void EXTI0_IRQHandler(void) {
+    EXTI_ClearITPendingBit(EXTI_Line0);
     if (exti0_callback != 0) {
         exti0_callback();
     }
-    EXTI_ClearITPendingBit(EXTI_Line0);
 }
 void EXTI1_IRQHandler(void) {
+    EXTI_ClearITPendingBit(EXTI_Line1);
     if (exti1_callback != 0) {
         exti1_callback();
     }
-    EXTI_ClearITPendingBit(EXTI_Line1);
 }
 void EXTI2_IRQHandler(void) {
+    EXTI_ClearITPendingBit(EXTI_Line2);
     if (exti2_callback != 0) {
         exti2_callback();
     }
-    EXTI_ClearITPendingBit(EXTI_Line2);
 }
 void EXTI3_IRQHandler(void) {
+    EXTI_ClearITPendingBit(EXTI_Line3);
     if (exti3_callback != 0) {
         exti3_callback();
     }
-    EXTI_ClearITPendingBit(EXTI_Line3);
 }
 void EXTI4_IRQHandler(void) {
+    EXTI_ClearITPendingBit(EXTI_Line4);
     if (exti4_callback != 0) {
         exti4_callback();
     }
-    EXTI_ClearITPendingBit(EXTI_Line4);
 }
 void EXTI9_5_IRQHandler(void) {
     if (EXTI_GetITStatus(EXTI_Line5) == SET) {
+        EXTI_ClearITPendingBit(EXTI_Line5);
         if (exti5_callback != 0) {
             exti5_callback();
         }
-        EXTI_ClearITPendingBit(EXTI_Line5);
     }
     else if (EXTI_GetITStatus(EXTI_Line6) == SET) {
+        EXTI_ClearITPendingBit(EXTI_Line6);
         if (exti6_callback != 0) {
             exti6_callback();
         }
-        EXTI_ClearITPendingBit(EXTI_Line6);
     }
     else if (EXTI_GetITStatus(EXTI_Line7) == SET) {
+        EXTI_ClearITPendingBit(EXTI_Line7);
         if (exti7_callback != 0) {
             exti7_callback();
         }
-        EXTI_ClearITPendingBit(EXTI_Line7);
     }
     else if (EXTI_GetITStatus(EXTI_Line8) == SET) {
+        EXTI_ClearITPendingBit(EXTI_Line8);
         if (exti8_callback != 0) {
             exti8_callback();
         }
-        EXTI_ClearITPendingBit(EXTI_Line8);
     }
     else if (EXTI_GetITStatus(EXTI_Line9) == SET) {
+        EXTI_ClearITPendingBit(EXTI_Line9);
         if (exti9_callback != 0) {
             exti9_callback();
         }
-        EXTI_ClearITPendingBit(EXTI_Line9);
     }
 }
 void EXTI15_10_IRQHandler(void) {
     if (EXTI_GetITStatus(EXTI_Line10) == SET) {
+        EXTI_ClearITPendingBit(EXTI_Line10);
         if (exti10_callback != 0) {
             exti10_callback();
         }
-        EXTI_ClearITPendingBit(EXTI_Line10);
     }
     else if (EXTI_GetITStatus(EXTI_Line11) == SET) {
+        EXTI_ClearITPendingBit(EXTI_Line11);
         if (exti11_callback != 0) {
             exti11_callback();
         }
-        EXTI_ClearITPendingBit(EXTI_Line11);
     }
     else if (EXTI_GetITStatus(EXTI_Line12) == SET) {
+        EXTI_ClearITPendingBit(EXTI_Line12);
         if (exti12_callback != 0) {
             exti12_callback();
         }
-        EXTI_ClearITPendingBit(EXTI_Line12);
     }
     else if (EXTI_GetITStatus(EXTI_Line13) == SET) {
+        EXTI_ClearITPendingBit(EXTI_Line13);
         if (exti13_callback != 0) {
             exti13_callback();
         }
-        EXTI_ClearITPendingBit(EXTI_Line13);
     }
     else if (EXTI_GetITStatus(EXTI_Line14) == SET) {
+        EXTI_ClearITPendingBit(EXTI_Line14);
         if (exti14_callback != 0) {
             exti14_callback();
         }
-        EXTI_ClearITPendingBit(EXTI_Line14);
     }
     else if (EXTI_GetITStatus(EXTI_Line15) == SET) {
+        EXTI_ClearITPendingBit(EXTI_Line15);
         if (exti15_callback != 0) {
             exti15_callback();
         }
-        EXTI_ClearITPendingBit(EXTI_Line15);
     }
 }

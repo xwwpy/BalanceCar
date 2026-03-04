@@ -704,6 +704,26 @@
               <FileType>5</FileType>
               <FilePath>.\User\car_button.h</FilePath>
             </File>
+            <File>
+              <FileName>car_pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\car_pwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>car_pwm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\User\car_pwm.h</FilePath>
+            </File>
+            <File>
+              <FileName>car_encoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\car_encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>car_encoder.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\User\car_encoder.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -838,6 +858,16 @@
               <FileName>car_bat_test.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\test\car_bat_test.h</FilePath>
+            </File>
+            <File>
+              <FileName>car_encoder_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\test\car_encoder_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>car_encoder_test.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\test\car_encoder_test.h</FilePath>
             </File>
           </Files>
         </Group>
