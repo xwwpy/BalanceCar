@@ -12,11 +12,6 @@ void car_button_init(void) {
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; // 上拉输入
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; // 推挽输出
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
-
     userKeyButton.GPIO_Pin = GPIO_Pin_11;
     userKeyButton.gpio_port = GPIOA;
     userKeyButton.last_state = RELEASED;
