@@ -1,5 +1,7 @@
 #include "car_pwm.h"
 
+static volatile uint8_t motor_cmd = 0; // 0 休眠 1 唤醒
+
 static void Motor_STBY_Init(void) { 
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 
@@ -82,7 +84,13 @@ void car_pwm_proc(void) {
 void car_pwm_cmd(uint8_t cmd) {
     if (cmd == 0) {
         GPIO_ResetBits(GPIOA, GPIO_Pin_1);
+        motor_cmd = 0;
     } else if (cmd == 1) { 
         GPIO_SetBits(GPIOA, GPIO_Pin_1);
+        motor_cmd = 1;
     }
+}
+
+uint8_t car_pwm_get_cmd(void) {
+    return motor_cmd;
 }

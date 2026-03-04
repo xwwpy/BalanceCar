@@ -29,10 +29,10 @@ void car_button_proc(void) {
 }
 
 static void car_user_key_pressed_callback(void) {
-    if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_1) == RESET) {
-        GPIO_SetBits(GPIOA, GPIO_Pin_1);
+    if (car_pwm_get_cmd() == 0) {
+        car_pwm_cmd(1);
     } else {
-        GPIO_ResetBits(GPIOA, GPIO_Pin_1);
+        car_pwm_cmd(0);
     }
 }
 
