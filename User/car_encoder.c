@@ -1,10 +1,11 @@
 #include "car_encoder.h"
+#include "car_usart2.h"
 
 static volatile int64_t encoder_L_count = 0;
 static volatile int64_t encoder_R_count = 0;
 
-static void Motor_L_callback(void); // 左轮编码器中断回调函数
-static void Motor_R_callback(void); // 右轮编码器中断回调函数
+void Motor_L_callback(void); // 左轮编码器中断回调函数
+void Motor_R_callback(void); // 右轮编码器中断回调函数
 
 static void Encoder_L_Init(void) { 
     ExitFullInitTypedef init_structure;
@@ -56,7 +57,15 @@ void car_encoder_proc(void) {
 
 }
 
-static void Motor_L_callback(void) { 
+int64_t car_encoder_get_L(void) { 
+    return encoder_L_count;
+}
+
+int64_t car_encoder_get_R(void) { 
+    return encoder_R_count;
+}
+
+void Motor_L_callback(void) { 
     uint8_t gpiob_pin_14_state = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_14);
     uint8_t gpiob_pin_15_state = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_15);
     if (gpiob_pin_14_state == Bit_SET && gpiob_pin_15_state == Bit_RESET) {
@@ -70,7 +79,7 @@ static void Motor_L_callback(void) {
     }
 }
 
-static void Motor_R_callback(void) { 
+void Motor_R_callback(void) { 
     uint8_t gpiob_pin_3_state = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_3);
     uint8_t gpiob_pin_4_state = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_4);
     if (gpiob_pin_3_state == Bit_SET && gpiob_pin_4_state == Bit_RESET) {
