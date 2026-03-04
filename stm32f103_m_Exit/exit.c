@@ -19,69 +19,69 @@ EXTI_Callback exti15_callback = 0;
 
 void Xww_Exit_Init(ExitFullInitTypedef* init_structure) {
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE); //  开启AFIO时钟
-    GPIO_InitTypeDef gpio_inin_structure; // 初始化对应的gpio时钟
-    gpio_inin_structure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitTypeDef gpio_init_structure; // 初始化对应的gpio时钟
+    gpio_init_structure.GPIO_Speed = GPIO_Speed_50MHz;
     switch (init_structure->GPIO_PinSource) {
         case GPIO_PinSource0:
-            gpio_inin_structure.GPIO_Pin = GPIO_Pin_0;
+            gpio_init_structure.GPIO_Pin = GPIO_Pin_0;
             break;
         case GPIO_PinSource1:
-            gpio_inin_structure.GPIO_Pin = GPIO_Pin_1;
+            gpio_init_structure.GPIO_Pin = GPIO_Pin_1;
             break;
         case GPIO_PinSource2:
-            gpio_inin_structure.GPIO_Pin = GPIO_Pin_2;
+            gpio_init_structure.GPIO_Pin = GPIO_Pin_2;
             break;
         case GPIO_PinSource3:
-            gpio_inin_structure.GPIO_Pin = GPIO_Pin_3;
+            gpio_init_structure.GPIO_Pin = GPIO_Pin_3;
             break;
         case GPIO_PinSource4:
-            gpio_inin_structure.GPIO_Pin = GPIO_Pin_4;
+            gpio_init_structure.GPIO_Pin = GPIO_Pin_4;
             break;
         case GPIO_PinSource5:
-            gpio_inin_structure.GPIO_Pin = GPIO_Pin_5;
+            gpio_init_structure.GPIO_Pin = GPIO_Pin_5;
             break;
         case GPIO_PinSource6:
-            gpio_inin_structure.GPIO_Pin = GPIO_Pin_6;
+            gpio_init_structure.GPIO_Pin = GPIO_Pin_6;
             break;
         case GPIO_PinSource7:
-            gpio_inin_structure.GPIO_Pin = GPIO_Pin_7;
+            gpio_init_structure.GPIO_Pin = GPIO_Pin_7;
             break;
         case GPIO_PinSource8:
-            gpio_inin_structure.GPIO_Pin = GPIO_Pin_8;
+            gpio_init_structure.GPIO_Pin = GPIO_Pin_8;
             break;
         case GPIO_PinSource9:
-            gpio_inin_structure.GPIO_Pin = GPIO_Pin_9;
+            gpio_init_structure.GPIO_Pin = GPIO_Pin_9;
             break;
         case GPIO_PinSource10:
-            gpio_inin_structure.GPIO_Pin = GPIO_Pin_10;
+            gpio_init_structure.GPIO_Pin = GPIO_Pin_10;
             break;
         case GPIO_PinSource11:
-            gpio_inin_structure.GPIO_Pin = GPIO_Pin_11;
+            gpio_init_structure.GPIO_Pin = GPIO_Pin_11;
             break;
         case GPIO_PinSource12:
-            gpio_inin_structure.GPIO_Pin = GPIO_Pin_12;
+            gpio_init_structure.GPIO_Pin = GPIO_Pin_12;
             break;
         case GPIO_PinSource13:
-            gpio_inin_structure.GPIO_Pin = GPIO_Pin_13;
+            gpio_init_structure.GPIO_Pin = GPIO_Pin_13;
             break;
         case GPIO_PinSource14:
-            gpio_inin_structure.GPIO_Pin = GPIO_Pin_14;
+            gpio_init_structure.GPIO_Pin = GPIO_Pin_14;
             break;
         case GPIO_PinSource15:
-            gpio_inin_structure.GPIO_Pin = GPIO_Pin_15;
+            gpio_init_structure.GPIO_Pin = GPIO_Pin_15;
             break;
         default:
             break;
     }
     switch (init_structure->EXTI_Trigger) {
         case EXTI_Trigger_Rising:
-            gpio_inin_structure.GPIO_Mode = GPIO_Mode_IPD; // 配置为下拉输入
+            gpio_init_structure.GPIO_Mode = GPIO_Mode_IPD; // 配置为下拉输入
             break;
         case EXTI_Trigger_Falling:
-            gpio_inin_structure.GPIO_Mode = GPIO_Mode_IPU; // 配置为上拉输入
+            gpio_init_structure.GPIO_Mode = GPIO_Mode_IPU; // 配置为上拉输入
             break;
         case EXTI_Trigger_Rising_Falling:
-            gpio_inin_structure.GPIO_Mode = GPIO_Mode_IPU; // 配置为上拉输入
+            gpio_init_structure.GPIO_Mode = GPIO_Mode_IPU; // 配置为上拉输入
             break;
         default:
             break;
@@ -89,31 +89,31 @@ void Xww_Exit_Init(ExitFullInitTypedef* init_structure) {
     switch (init_structure->GPIO_PortSource) {
         case GPIO_PortSourceGPIOA:
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-            GPIO_Init(GPIOA, &gpio_inin_structure);
+            GPIO_Init(GPIOA, &gpio_init_structure);
             break;
         case GPIO_PortSourceGPIOB:
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-            GPIO_Init(GPIOB, &gpio_inin_structure);
+            GPIO_Init(GPIOB, &gpio_init_structure);
             break;
         case GPIO_PortSourceGPIOC:
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
-            GPIO_Init(GPIOC, &gpio_inin_structure);
+            GPIO_Init(GPIOC, &gpio_init_structure);
             break;
         case GPIO_PortSourceGPIOD:
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE);
-            GPIO_Init(GPIOD, &gpio_inin_structure);
+            GPIO_Init(GPIOD, &gpio_init_structure);
             break;
         case GPIO_PortSourceGPIOE:
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOE, ENABLE);
-            GPIO_Init(GPIOE, &gpio_inin_structure);
+            GPIO_Init(GPIOE, &gpio_init_structure);
             break;
         case GPIO_PortSourceGPIOF:
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOF, ENABLE);
-            GPIO_Init(GPIOF, &gpio_inin_structure);
+            GPIO_Init(GPIOF, &gpio_init_structure);
             break;
         case GPIO_PortSourceGPIOG:
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOG, ENABLE);
-            GPIO_Init(GPIOG, &gpio_inin_structure);
+            GPIO_Init(GPIOG, &gpio_init_structure);
             break;
         default:
             break;
@@ -130,6 +130,7 @@ void Xww_Exit_Init(ExitFullInitTypedef* init_structure) {
     NVIC_InitTypeDef nvi_init_structure; // 初始化对应的exti通道的中断优先级
     nvi_init_structure.NVIC_IRQChannelPreemptionPriority = init_structure->NVIC_IRQChannelPreemptionPriority;
     nvi_init_structure.NVIC_IRQChannelSubPriority = init_structure->NVIC_IRQChannelSubPriority;
+    nvi_init_structure.NVIC_IRQChannelCmd = ENABLE;
     switch (init_structure->EXTI_Line) {
         case EXTI_Line0:
             nvi_init_structure.NVIC_IRQChannel = EXTI0_IRQn;
