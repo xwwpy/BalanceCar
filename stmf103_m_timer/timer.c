@@ -2,19 +2,23 @@
 
 TimerCallBack timer1_update_callback;
 
-u32 current_s = 0;
+uint64_t current_s = 0;
 
 u16 tick_count = 0;
 
 uint8_t timer1_init_flag = 0;
 uint8_t timer4_init_flag = 0;
 
-u32 get_current_s(void) {
+uint64_t get_current_s(void) {
     return current_s;
 }
 
-u32 get_current_ms(void) {
-    return tick_count;
+uint64_t get_current_ms(void) {
+    return get_tick();
+}
+
+uint64_t get_current_us(void) {
+    return current_s * 1000000 + tick_count * 1000 + TIM_GetCounter(TIM1);
 }
 
 void Xww_Timer1_Init(TimerInitStructure* init_structure) {
@@ -134,7 +138,7 @@ u16 calculate_pwm(u16 max_val, float target_v, float source_v) {
     return (u16)(max_val * (target_v / source_v));
 }
 
-u32 get_tick(){
+uint64_t get_tick(){
     return current_s * 1000 + tick_count;
 }
 
