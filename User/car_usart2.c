@@ -1,27 +1,14 @@
 #include "car_usart2.h"
 
-volatile u8 send_buff[500] = {0};
-volatile u8 receive_buff[200] = {0};
+volatile u8 receive_buff[50] = {0};
 volatile u8 receive_idx = 0;
-volatile u8 end_idx = 0;
 void send_string(char* str, u8 len) {
 	while (len--) {
-		send_buff[end_idx] = *str;
-		end_idx += 1;
+		while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET); // 等待发送缓冲区空
+		USART_SendData(USART2, *str);
 		str++;
 	}
-	USART_ITConfig(USART2, USART_IT_TXE, ENABLE); // 开启发送中断
-}
-
-u8 get_current_send_data() {
-	u8 res = send_buff[0];
-
-	for (u8 i = 0; i < end_idx - 1; i++) {
-		send_buff[i] = send_buff[i + 1];
-	}
-
-	end_idx--;
-	return res;
+	while (USART_GetFlagStatus(USART2, USART_FLAG_TC) == RESET); // 等待发送完成
 }
 
 void usart2_init(void) {
@@ -40,7 +27,7 @@ void usart2_init(void) {
 	GPIO_Init(GPIOA, &gpioa_init_structure);
 
 	USART_InitTypeDef usart2_init_structure;
-	usart2_init_structure.USART_BaudRate = 9600; 
+	usart2_init_structure.USART_BaudRate = 115200; 
 	usart2_init_structure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
 	usart2_init_structure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 	usart2_init_structure.USART_StopBits = USART_StopBits_1;
@@ -63,20 +50,10 @@ void usart2_init(void) {
 int fputc(int ch, FILE * file) {
 	char tmp = (char) ch;
 	send_string(&tmp, 1);
-	while (USART_GetFlagStatus(USART2, USART_IT_TXE));
 	return ch;
 }
 
 void USART2_IRQHandler(void) {
-	if (USART_GetITStatus(USART2, USART_IT_TXE) == SET) { // 如果发送寄存器为空
-		if (end_idx == 0) {
-			USART_ITConfig(USART2, USART_IT_TXE, DISABLE);
-			return;
-		}
-		USART_SendData(USART2, get_current_send_data());
-		USART_ClearITPendingBit(USART2, USART_IT_TXE);
-	}
-
 	if (USART_GetITStatus(USART2, USART_IT_RXNE) == SET) {
 		receive_buff[receive_idx] = USART_ReceiveData(USART2);
 		receive_idx ++;
