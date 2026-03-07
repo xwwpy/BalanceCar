@@ -869,6 +869,16 @@
               <FileType>5</FileType>
               <FilePath>.\test\car_encoder_test.h</FilePath>
             </File>
+            <File>
+              <FileName>car_measure_method_m_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\test\car_measure_method_m_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>car_measure_method_m_test.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\test\car_measure_method_m_test.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

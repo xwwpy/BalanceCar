@@ -6,4 +6,6 @@ void car_encoder_init(void);
 void car_encoder_proc(void);
 int64_t car_encoder_get_L(void);
 int64_t car_encoder_get_R(void);
+float car_encoder_get_L_angle(void);
+float car_encoder_get_R_angle(void);
 #endif // !__CAR_ENCONDER_H__

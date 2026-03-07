@@ -65,6 +65,14 @@ int64_t car_encoder_get_R(void) {
     return encoder_R_count;
 }
 
+float car_encoder_get_L_angle(void) { 
+    return encoder_L_count / 449.0f * 360.0f;
+}
+
+float car_encoder_get_R_angle(void) { 
+    return encoder_R_count / 449.0f * 360.0f;
+}
+
 void Motor_L_callback(void) { 
     uint8_t gpiob_pin_14_state = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_14);
     uint8_t gpiob_pin_15_state = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_15);
