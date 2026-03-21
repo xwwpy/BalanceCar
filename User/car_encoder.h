@@ -2,10 +2,13 @@
 #define __CAR_ENCONDER_H__
 #include "stm32f10x.h"
 #include "exit.h"
+#include "timer.h"
 void car_encoder_init(void);
 void car_encoder_proc(void);
 int64_t car_encoder_get_L(void);
 int64_t car_encoder_get_R(void);
 float car_encoder_get_L_angle(void);
 float car_encoder_get_R_angle(void);
+float car_encoder_get_L_speed(void);
+float car_encoder_get_R_speed(void);
 #endif // !__CAR_ENCONDER_H__
