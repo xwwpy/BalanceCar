@@ -6,7 +6,7 @@ ErrorStatus IIC_Send_Bytes(I2C_TypeDef* IICx, u8 address, u8 * _bytes, u8 len) {
 	
 	I2C_ClearFlag(IICx, I2C_FLAG_AF); // 清楚错误标记位
 	I2C_GenerateSTART(IICx, ENABLE); // 产生起始信号
-
+	
 	while (I2C_GetFlagStatus(IICx, I2C_FLAG_SB) == RESET); // 等待起始信号发送完毕
 
 	I2C_Send7bitAddress(IICx, address, I2C_Direction_Transmitter); // 发送地址
@@ -49,7 +49,7 @@ ErrorStatus IIC_Receive_Bytes(I2C_TypeDef* IICx, u8 address, u8* target_buf, u8 
 	while (I2C_GetFlagStatus(IICx, I2C_FLAG_BUSY) == SET); // 等待总线空闲
 	I2C_ClearFlag(IICx, I2C_FLAG_AF); // 清楚错误标记位
 	I2C_GenerateSTART(IICx, ENABLE); // 产生起始信号
-
+	while (I2C_GetFlagStatus(IICx, I2C_FLAG_SB) == RESET); // 等待起始信号发送完成
 	I2C_Send7bitAddress(IICx, address, I2C_Direction_Receiver); // 发送读取数据的地址
 
 	while (I2C_GetFlagStatus(IICx, I2C_FLAG_ADDR) == RESET) {
@@ -59,11 +59,10 @@ ErrorStatus IIC_Receive_Bytes(I2C_TypeDef* IICx, u8 address, u8* target_buf, u8 
 		}	
 	}
 
-	I2C_ReadRegister(IICx, I2C_Register_SR1);
-	I2C_ReadRegister(IICx, I2C_Register_SR2); // 清除addr标志位
-
 	if (len == 1) {
 		I2C_AcknowledgeConfig(IICx, DISABLE); // 提前准备数据到达之后需要发送ack还是nack
+		I2C_ReadRegister(IICx, I2C_Register_SR1);
+		I2C_ReadRegister(IICx, I2C_Register_SR2); // 清除addr标志位
 		while (I2C_GetFlagStatus(IICx, I2C_FLAG_RXNE) == RESET);//等待发送寄存器非空
 		I2C_GenerateSTOP(IICx, ENABLE);  // 发送停止信号
 		*target_buf = I2C_ReceiveData(IICx);
@@ -71,6 +70,8 @@ ErrorStatus IIC_Receive_Bytes(I2C_TypeDef* IICx, u8 address, u8* target_buf, u8 
 		return res;
 	} else if (len == 2) {
 		I2C_AcknowledgeConfig(IICx, ENABLE); // 提前准备数据到达之后需要发送ack还是nack
+		I2C_ReadRegister(IICx, I2C_Register_SR1);
+		I2C_ReadRegister(IICx, I2C_Register_SR2); // 清除addr标志位
 		while (I2C_GetFlagStatus(IICx, I2C_FLAG_RXNE) == RESET);//等待发送寄存器非空
 		*target_buf = I2C_ReceiveData(IICx);
 		target_buf ++;
@@ -82,7 +83,9 @@ ErrorStatus IIC_Receive_Bytes(I2C_TypeDef* IICx, u8 address, u8* target_buf, u8 
 		return res;
 	} else {
 		I2C_AcknowledgeConfig(IICx, ENABLE); // 提前准备第一个数据到达之后需要发送ack还是nack
-		while (len--) {
+		I2C_ReadRegister(IICx, I2C_Register_SR1);
+		I2C_ReadRegister(IICx, I2C_Register_SR2); // 清除addr标志位
+		while (len) {
 			I2C_AcknowledgeConfig(IICx, ENABLE); // 提前准备数据到达之后需要发送ack还是nack
 			if (len == 2) {
 				while (I2C_GetFlagStatus(IICx, I2C_FLAG_RXNE) == RESET); //等待倒数第二个数据到达
@@ -98,6 +101,7 @@ ErrorStatus IIC_Receive_Bytes(I2C_TypeDef* IICx, u8 address, u8* target_buf, u8 
 			while (I2C_GetFlagStatus(IICx, I2C_FLAG_RXNE) == RESET);//等待发送寄存器非空
 			*target_buf = I2C_ReceiveData(IICx);
 			target_buf ++;
+			len --;
 		}
 	}
 	
