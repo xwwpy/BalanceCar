@@ -724,6 +724,16 @@
               <FileType>5</FileType>
               <FilePath>.\User\car_encoder.h</FilePath>
             </File>
+            <File>
+              <FileName>car_mpu6050.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\car_mpu6050.c</FilePath>
+            </File>
+            <File>
+              <FileName>car_mpu6050.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\User\car_mpu6050.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -878,6 +888,26 @@
               <FileName>car_measure_method_m_test.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\test\car_measure_method_m_test.h</FilePath>
+            </File>
+            <File>
+              <FileName>car_measure_method_t_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\test\car_measure_method_t_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>car_measure_method_t_test.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\test\car_measure_method_t_test.h</FilePath>
+            </File>
+            <File>
+              <FileName>car_mpu6050_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\test\car_mpu6050_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>car_mpu6050_test.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\test\car_mpu6050_test.h</FilePath>
             </File>
           </Files>
         </Group>
