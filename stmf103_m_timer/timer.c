@@ -14,7 +14,7 @@ uint64_t get_current_s(void) {
 }
 
 uint64_t get_current_ms(void) {
-    return get_tick();
+    return current_s * 1000 + tick_count;
 }
 
 uint64_t get_current_us(void) {
@@ -143,6 +143,7 @@ uint64_t get_tick(){
 }
 
 void TIM1_UP_IRQHandler(void) {
+    TIM_ClearITPendingBit(TIM1, TIM_IT_Update); // 清除update中断标志位
     tick_count++;
     if (tick_count == 1000) {
         tick_count = 0;
@@ -151,5 +152,4 @@ void TIM1_UP_IRQHandler(void) {
     if (timer1_update_callback != 0) {
         timer1_update_callback();
     }
-    TIM_ClearITPendingBit(TIM1, TIM_IT_Update); // 清除update中断标志位
 }
