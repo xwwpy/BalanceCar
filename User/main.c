@@ -28,7 +28,9 @@ int main(void){
 	while(1) {
 		car_bat_show_led_proc(); // 根据电压显示对应的led状态
 		car_button_proc(); // 处理按键事件
-		Car_mpu6050_update();
+		car_mpu6050_proc(); // 处理mpu6050数据
+		// MPU6050_Test_YPR_proc();
+		// Car_mpu6050_update();
 		MPU6050_Test_proc();
 		// car_encoder_test_proc(); // 测试编码器
 		// car_measure_method_m_test_proc(); // 测试测量速度方法M

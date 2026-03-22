@@ -3,6 +3,7 @@
 #include "car_mpu6050.h"
 #include "car_usart2.h"
 #include "timer.h"
-#define MPU6050_TEST_INTERVAL 10
+#define MPU6050_TEST_INTERVAL 5
 void MPU6050_Test_proc(void);
+void MPU6050_Test_YPR_proc(void);
 #endif // !__CAR_MPU6050_TEST_H__
