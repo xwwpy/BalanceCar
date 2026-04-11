@@ -9,7 +9,6 @@ typedef struct {
 #include "stm32f10x.h"
 void Xww_Timer1_Init(TimerInitStructure* init_structure);
 u16 calculate_pwm(u16 max_val, float target_v, float source_v);
-uint64_t get_tick(void); 
 uint64_t get_current_s(void);
 uint64_t get_current_ms(void);
 uint64_t get_current_us(void);

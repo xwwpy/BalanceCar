@@ -1,5 +1,5 @@
 #include "Delay.h"
-
+#include "system_tick.h"
 /**
   * @brief  微秒级延时
   * @param  xus 延时时长，范围：0~233015
@@ -7,11 +7,8 @@
   */
 void Delay_us(uint32_t xus)
 {
-	SysTick->LOAD = 72 * xus;				//设置定时器重装值
-	SysTick->VAL = 0x00;					//清空当前计数值
-	SysTick->CTRL = 0x00000005;				//设置时钟源为HCLK，启动定时器
-	while(!(SysTick->CTRL & 0x00010000));	//等待计数到0
-	SysTick->CTRL = 0x00000004;				//关闭定时器
+	uint64_t cur = get_tick_us(); // 获取当前的微秒级时间
+	while((get_tick_us() - cur) < xus);
 }
 
 /**
